@@ -55,7 +55,7 @@ build_script:
   - ps: .\Squirrel.com -r c:\tsunami\Releases --no-msi --releasify c:\tsunami\release\Tsunami."$V_MAJ.$V_MIN.$V_BUG".nupkg 
   #- ps: rm c:\tsunami\Releases\Setup.exe 
 
-cache: c:\tsunami\Releases\*.*
+cache: Releases
 
 artifacts:
   - path: Releases/RELEASES
