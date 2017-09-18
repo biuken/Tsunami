@@ -47,7 +47,7 @@ build_script:
   #- appveyor DownloadFile "%TSU_ZIP_URL%" -FileName "C:\Tsunami.zip" && 7z x "C:\Tsunami.zip" -o"c:\tsunami\Releases"
   - mkdir c:\tsunami\Releases
   - dir c:\tsunami\Releases
-  - ps: nuget pack c:\tsunami\Tsunami.nuspec -Version "0.$V_MIN.$V_BUG" -Properties Configuration=Release -BasePath .
+  - ps: nuget pack c:\tsunami\Tsunami.nuspec -Version "$V_MAJ.$V_MIN.$V_BUG" -Properties Configuration=Release -BasePath .
   - cd "%SQUIRREL_DIR%"
   - ps: .\Squirrel.com -r c:\tsunami\Releases --no-msi --releasify c:\tsunami\release\Tsunami."0.$V_MIN.$V_BUG".nupkg 
   #- ps: rm c:\tsunami\Releases\Setup.exe 
@@ -61,15 +61,3 @@ artifacts:
 
   - path: Releases/Setup.exe 
     name: TsuSetup
-    
-  #- path: Releases
-  #  name: Tsunami
-    
-deploy:
-  provider: FTP
-  protocol: sftp
-  host: tsunami.adunanza.net
-  username: appveyorBotPlus
-  password:
-    secure: fudAgfl/410v1jYsi+GqgyPL7mgTEbmAnCBcX+5vlY0ZMF7dFDTJIdbWoYSRCH9m76+jCzjdarkICZpZFz5VipKuRuSAjfzDHAQO1/EMbHDbilPQVIqgf0vqoTfRNYAU79fbcb4w/Ez6je55SUwC6Q==
-  folder: releases
