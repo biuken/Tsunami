@@ -7,6 +7,8 @@ platform: x64
 
 configuration: Release
 
+test: off
+
 environment:
     REPO_DIR: &REPO_DIR c:\tsunami
     SQUIRREL_DIR: &SQUIRREL_DIR c:\squirrel
@@ -52,7 +54,9 @@ build_script:
   - cd "%SQUIRREL_DIR%"
   - ps: .\Squirrel.com -r c:\tsunami\Releases --no-msi --releasify c:\tsunami\release\Tsunami."$V_MAJ.$V_MIN.$V_BUG".nupkg 
   #- ps: rm c:\tsunami\Releases\Setup.exe 
-  
+
+cache: c:\tsunami\Releases\*.*
+
 artifacts:
   - path: Releases/RELEASES
     name: TsuRelFile
