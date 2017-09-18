@@ -32,7 +32,7 @@ before_build:
   - ps: $V_BUG=select-string -Path ".\version.pri" -Pattern "VER_BUGFIX ="
   - ps: $V_BUG="$V_BUG"
   - ps: $V_BUG=$V_BUG.split()[-1]
-  - ps: Update-AppveyorBuild -Version "0.$V_MIN.$V_BUG"
+  - ps: Update-AppveyorBuild -Version "$V_MAJ.$V_MIN.$V_BUG"
   
 build_script:
   - appveyor DownloadFile "%TSU_LIB_URL%" -FileName "c:\libraries.7z" && 7z x "c:\libraries.7z" -o"%REPO_DIR%"
@@ -41,8 +41,10 @@ build_script:
   - nmake release
   - cp lib_rel/*.dll release
   - cd release
+  - del /Q *.cpp
   - dir
   - windeployqt --release --no-opengl-sw --no-translations Tsunami.exe
+  - del /Q libGLESV2.dll libEGL.dll d3dcompiler_47.dll
   - appveyor DownloadFile "%SQUIRREL_URL%" -FileName "C:\squirrel.zip" && 7z x "C:\squirrel.zip" -o"%SQUIRREL_DIR%"
   #- appveyor DownloadFile "%TSU_ZIP_URL%" -FileName "C:\Tsunami.zip" && 7z x "C:\Tsunami.zip" -o"c:\tsunami\Releases"
   - mkdir c:\tsunami\Releases
