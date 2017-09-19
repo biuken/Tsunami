@@ -69,4 +69,4 @@ artifacts:
 
 deploy:
   provider: Environment
-  name: biuken ftp
+  name: Tsunami ftp
